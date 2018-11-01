@@ -25,8 +25,8 @@
                 <a class="mui-navigate-right" href="#account">
                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="../images/user.jpg">
                     <div class="mui-media-body">
-                        Hello MUI
-                        <p class="mui-ellipsis">账号:hellomui</p>
+                        <span class="name"></span>
+                        
                     </div>
                 </a>
             </li>
@@ -85,9 +85,13 @@
             // 检测到用户未登录
             if (info.error) {
                 location.href = './login.html';
+             
             }
+
+            // 显示用户信息
+            $('span.name').text(info.username);
         }
-    });
+    })
 
     // 退出用户登录
     $('.btn_outLogin').on('click', function () {
