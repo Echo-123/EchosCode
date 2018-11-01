@@ -47,6 +47,28 @@
 
 <script src="../js/jquery.min.js"></script>
 <script>
+    // 为了提升用户体验，在开发登录功能时，如果用户原本要访问的地址需要登录，当登录成功时再次返回原本的地址
+    // 1. 获取地址参数
+    // console.log(location.search);
+    var search = location.search.slice(1);
+    // 正则表达式
+    var reg = /url=(.+)/;
+
+    // 如果正则匹配成功是一个数组，不成功是一个null
+    var match = reg.exec(search);
+    // console.log(match);
+    // console.log(match[1]);
+    // if(match) {
+    //     url = match[1];
+    // } else {
+    //     url = '/index.html';
+    // }
+
+    // var url = match || match[1];
+    // 获得地址上的地址
+    var url = match && match[1];
+    url = url || '/index.html';
+    
     // 当用户提交表单时，获取用户输入的用户名和密码信息，然后提交至后端
     $('form').on('submit', function () {
         // alert(1);
@@ -68,7 +90,7 @@
             // },
             success: function (info) {
                 if (info.success) {
-                    location.href = '../index.html';
+                    location.href = url;
                 }
             }
         });
